@@ -1,0 +1,41 @@
+#include <SPI.h>
+#include <LoRa.h>
+
+#define ss 18
+// Written for Heltec LoRa V2 Board
+// Feel free to contact me: olaf@ramge.de
+#define reset 14
+#define dio0 26
+
+int counter = 0;
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);
+
+  Serial.println("LoRa Sender");
+ LoRa.setPins(ss, reset, dio0);
+  if (!LoRa.begin(868E6)) {   /// <------------------Set frequency here
+    Serial.println("Starting LoRa failed!");
+    while (1);
+  }
+
+  LoRa.setSpreadingFactor(12);
+  LoRa.setSignalBandwidth(7.8E3);
+  
+}
+
+void loop() {
+  Serial.print("Sending packet: ");
+  Serial.println(counter);
+
+  // send packet
+  LoRa.beginPacket();
+  LoRa.print("The quick brown fox jumps over the lazy dog");
+  LoRa.print(counter);
+  LoRa.endPacket();
+
+  counter++;
+
+  delay(5000);
+}
