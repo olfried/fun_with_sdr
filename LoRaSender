@@ -1,9 +1,10 @@
+// Written for Heltec LoRa V2 Board
+// Feel free to contact me: olaf@ramge.de
+
 #include <SPI.h>
 #include <LoRa.h>
 
 #define ss 18
-// Written for Heltec LoRa V2 Board
-// Feel free to contact me: olaf@ramge.de
 #define reset 14
 #define dio0 26
 
